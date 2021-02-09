@@ -1,5 +1,5 @@
 <template>
-  <Todos v-bind:todos="todos"/>
+  <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" v-on:complete-todo="changeStatus"/>
 </template>
 
 <script>
@@ -30,6 +30,14 @@ export default {
         },
         
       ]
+    }
+  },
+  methods: {
+    deleteTodo(id) {
+      this.todos = this.todos.filter( todo => todo.id !== id)
+    },
+    changeStatus(id) {
+      this.todos.forEach(todo => todo.id === id ? todo.completed = !todo.completed : '')
     }
   }
 }
